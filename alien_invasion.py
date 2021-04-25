@@ -15,14 +15,14 @@ class AlienInvasion:
     def run_game(self):
         """"Запуск нового цикла игры."""
         while True:
-            #Отслеживаем события клавиатуры и мыши
+            #Отслеживаем события клавиатуры и мыши.
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     sys.exit()
 
             self.screen.fill(self.bg_color)
 
-            #Отображение последнего прорисованного экрана
+            #Отображение последнего прорисованного экрана.
             pygame.display.flip()
 
 if __name__ == '__main__':
