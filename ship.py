@@ -8,7 +8,7 @@ class Ship():
         self.screen_rect = ai_game.screen.get_rect()
 
         #Загружаем картинку
-        self.image = pygame.image.load('images/ship.bmp')
+        self.image = pygame.image.load('images/ship.gif')
         self.rect = self.image.get_rect()
         #Каждый новый корабль появляется у нижнего края экрана
         self.rect.midbottom = self.screen_rect.midbottom
