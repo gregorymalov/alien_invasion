@@ -3,6 +3,7 @@ import pygame
 from settings import Settings
 from ship import Ship
 from bullet import Bullet
+from alien import Alien
 
 class AlienInvasion:
     """Управление ресурами игры."""
@@ -19,6 +20,9 @@ class AlienInvasion:
 
         self.ship = Ship(self)
         self.bullets = pygame.sprite.Group()
+        self.aliens = pygame.sprite.Group()
+
+        self._create_fleet()
     
     def run_game(self):
         """Запуск нового цикла игры."""
@@ -26,7 +30,24 @@ class AlienInvasion:
             self._check_events()
             self.ship.update()
             self._update_bullets()
+            #self.alien.update()
             self._update_screen()
+
+    def _create_fleet(self):
+        """Создание флота пришельцев"""
+        #Создание пришельца
+        alien = Alien(self)
+        alien_width = alien.rect.width
+        available_space_x = self.settings.screen_width - (2 * alien_width)
+        number_aliens_x = available_space_x // (2 * alien_width)
+        
+        # Создание первого ряда пришельцев.
+        for alien_number in range(number_aliens_x):
+        # Создание пришельца и размещение его в ряду.
+            alien = Alien(self)
+            alien.x = alien_width + 2 * alien_width * alien_number
+            alien.rect.x = alien.x
+            self.aliens.add(alien)
 
     def _check_events(self):
             """Отслеживаем события клавиатуры и мыши."""
@@ -78,7 +99,10 @@ class AlienInvasion:
             self.ship.blitme()
             for bullet in self.bullets.sprites():
                 bullet.draw_bullet()
+            self.aliens.draw(self.screen)
+
             pygame.display.flip()
+
 
 if __name__ == '__main__':
     #Создание экземпляра и запуск игры.
